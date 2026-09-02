@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 聰明照顧者徵件活動 報名表</title>
+<style>
+  :root{
+    --ink:#1f2a24;
+    --paper:#faf7f0;
+    --line:#cfc6b0;
+    --accent:#5b7a5e;
+    --accent-dark:#3f5842;
+    --danger:#b3523f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Microsoft JhengHei","微軟正黑體","PingFang TC","Noto Sans TC",sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    padding:32px 20px 20px;
+    max-width:760px;
+    margin:0 auto;
+    border-bottom:2px solid var(--ink);
+  }
+  header h1{ font-size:1.5rem; margin:0 0 6px; letter-spacing:.02em; }
+  header p{ margin:0; font-size:.9rem; color:#5a5548; }
+  form{ max-width:760px; margin:0 auto; padding:20px; }
+  fieldset{
+    border:1px solid var(--line);
+    border-radius:2px;
+    margin:0 0 24px;
+    padding:18px 20px 22px;
+    background:#fff;
+  }
+  legend{ font-weight:700; font-size:1.05rem; padding:0 8px; color:var(--accent-dark); }
+  .field{ margin:14px 0; }
+  label{ display:block; font-size:.92rem; margin-bottom:5px; color:#3a362c; }
+  .req::after{ content:" *"; color:var(--danger); }
+  input[type=text], input[type=email], input[type=tel], input[type=number], textarea, select{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    font-family:inherit;
+    font-size:.95rem;
+    background:#fffdf8;
+  }
+  textarea{ resize:vertical; min-height:90px; }
+  .hint{ font-size:.78rem; color:#8a8272; margin-top:4px; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  @media (max-width:560px){ .row2,.row3{ grid-template-columns:1fr; } }
+  .radio-group, .check-group{ display:flex; flex-wrap:wrap; gap:14px; }
+  .radio-group label, .check-group label{ display:flex; align-items:center; gap:6px; font-size:.9rem; margin:0; }
+  .repeat-item{
+    border:1px dashed var(--line);
+    padding:14px;
+    border-radius:2px;
+    margin-bottom:12px;
+    background:#fbf9f3;
+  }
+  .repeat-item h4{ margin:0 0 10px; font-size:.95rem; color:var(--accent-dark); }
+  button.add, button.remove{
+    font-size:.82rem;
+    padding:6px 12px;
+    border:1px solid var(--accent);
+    background:#fff;
+    color:var(--accent-dark);
+    border-radius:2px;
+    cursor:pointer;
+  }
+  button.remove{ border-color:var(--danger); color:var(--danger); }
+  .photo-drop{
+    border:2px dashed var(--line);
+    border-radius:4px;
+    padding:24px;
+    text-align:center;
+    background:#fff;
+    cursor:pointer;
+  }
+  .photo-drop.drag{ background:#f0efe4; border-color:var(--accent); }
+  .thumbs{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+  .thumbs img{ width:96px; height:96px; object-fit:cover; border:1px solid var(--line); border-radius:3px; }
+  .submit-bar{ display:flex; align-items:center; gap:16px; margin-top:8px; }
+  button.submit{
+    background:var(--accent-dark);
+    color:#fff;
+    border:none;
+    padding:12px 28px;
+    font-size:1rem;
+    border-radius:3px;
+    cursor:pointer;
+  }
+  button.submit:disabled{ opacity:.5; cursor:default; }
+  #status{ font-size:.9rem; }
+  #status.err{ color:var(--danger); }
+  #status.ok{ color:var(--accent-dark); }
+  .counter{ font-size:.8rem; color:#8a8272; text-align:right; margin-top:4px; }
+  .counter.over{ color:var(--danger); font-weight:700; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>2026 聰明照顧者徵件活動　報名資料表</h1>
+  <p>請家照據點協助照顧者填寫本表，欄位對應紙本資料表第 12–13 頁。填妥後可直接上傳照片，不需登入帳號。</p>
+</header>
+
+<form id="regForm">
+
+  <fieldset>
+    <legend>一、家照據點資料</legend>
+    <div class="row2">
+      <div class="field"><label class="req">據點名稱</label><input type="text" name="site_name" required></div>
+      <div class="field"><label class="req">家照專員</label><input type="text" name="site_officer" required></div>
+      <div class="field"><label class="req">連絡電話</label><input type="tel" name="site_phone" required></div>
+      <div class="field"><label class="req">Email</label><input type="email" name="site_email" required></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>二、照顧者資料</legend>
+    <div class="row2">
+      <div class="field"><label class="req">姓名</label><input type="text" name="carer_name" required></div>
+      <div class="field">
+        <label>性別</label>
+        <div class="radio-group">
+          <label><input type="radio" name="carer_gender" value="男"> 男</label>
+          <label><input type="radio" name="carer_gender" value="女"> 女</label>
+        </div>
+      </div>
+      <div class="field"><label>出生年（民國）</label><input type="number" name="carer_birth_year" placeholder="例：65"></div>
+      <div class="field">
+        <label>婚姻狀況</label>
+        <div class="radio-group">
+          <label><input type="radio" name="carer_marital" value="有"> 有</label>
+          <label><input type="radio" name="carer_marital" value="無"> 無</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>照顧者就業狀況</label>
+        <select name="carer_job_status">
+          <option value="無">無</option><option value="全職">全職</option>
+          <option value="兼職">兼職</option><option value="其他">其他</option>
+        </select>
+      </div>
+      <div class="field"><label>就業狀況（其他，若有）</label><input type="text" name="carer_job_other"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>三、被照顧者資料（照顧對象，最多 4 位，可再新增更多）</legend>
+    <p class="hint">每一位被照顧者請填完整的一組資料（關係、年資、失能等級、使用服務），是同一個人的資料。</p>
+    <div id="caredWrap"></div>
+    <button type="button" class="add" onclick="addCared()">+ 新增被照顧者</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>四、照顧負荷</legend>
+    <div class="row3">
+      <div class="field"><label>初評分數</label><input type="number" name="burden_initial_score"></div>
+      <div class="field"><label>初評日期</label><input type="text" name="burden_initial_date" placeholder="YYYY/MM/DD"></div>
+      <div class="field"></div>
+      <div class="field"><label>複評分數（最近一次）</label><input type="number" name="burden_review_score"></div>
+      <div class="field"><label>複評日期</label><input type="text" name="burden_review_date" placeholder="YYYY/MM/DD"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>五、聰明照顧故事描述</legend>
+
+    <div class="field">
+      <label class="req">照顧處境（家庭狀況？與誰同住？照顧誰？照顧失能、失智或身心障礙家人？被照顧者失能等級或需要照顧的事項？有無替手？挑戰或困境？照顧者承受的身心負荷？建議 300 字內）</label>
+      <textarea name="story_situation" data-counter="counter_situation" required></textarea>
+      <div class="counter" id="counter_situation">0 / 300 字</div>
+    </div>
+
+    <div class="field">
+      <label class="req">善用資源（使用了哪些服務？如何利用長照服務或其他資源？如何克服難題？或其他可資表揚或提供大眾借鏡的經驗？建議 300 字內）</label>
+      <textarea name="story_resources" data-counter="counter_resources" required></textarea>
+      <div class="counter" id="counter_resources">0 / 300 字</div>
+    </div>
+
+    <div class="field">
+      <label class="req">家照服務（家照據點專業人員如何提供服務與陪伴，照顧者參與的活動，如何突破困境，照顧壓力的調適、建立支持網絡，過程中看見照顧者的轉變及其他照顧者與專業人員合作翻轉照顧現況的故事？建議 300 字內）</label>
+      <textarea name="story_service" data-counter="counter_service" required></textarea>
+      <div class="counter" id="counter_service">0 / 300 字</div>
+    </div>
+
+    <div class="field">
+      <label class="req">照片（1–2 張）</label>
+      <div class="photo-drop" id="photoDrop">
+        點擊或拖曳照片到此處上傳（每張上限 5MB）
+        <input type="file" id="photoInput" accept="image/*" multiple style="display:none">
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>六、推薦縣市局處資料（若有，非必填）</legend>
+    <div class="row2">
+      <div class="field"><label>單位名稱</label><input type="text" name="ref_org"></div>
+      <div class="field"><label>承辦人</label><input type="text" name="ref_officer"></div>
+      <div class="field"><label>連絡電話</label><input type="tel" name="ref_phone"></div>
+      <div class="field"><label>Email</label><input type="email" name="ref_email"></div>
+    </div>
+  </fieldset>
+
+  <div class="submit-bar">
+    <button type="submit" class="submit" id="submitBtn">送出報名資料</button>
+    <span id="status"></span>
+  </div>
+</form>
+
+<script>
+/* ====== CONFIGURE THIS: paste your deployed Apps Script Web App URL ====== */
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwFqSfs8EXi96sMSDY22RzK3a1j0GsVpxUn2jxMsJMJLzCUfoKBOFN85f8iBaUHQUbC/exec";
+/* ========================================================================= */
+
+const WORD_LIMIT = 300;
+const svcOptions = ["居家服務","日間照顧服務","家庭托顧服務","專業服務（復能照護、營養照護等）","輔具及居家無障礙環境改善服務","交通接送","喘息服務","其他"];
+
+let caredCount = 0;
+const MAX_CARED = 4;
+
+function addCared(){
+  if (caredCount >= MAX_CARED) {
+    if (!confirm("已達預設的 4 位上限，仍要繼續新增嗎？")) return;
+  }
+  caredCount++;
+  const id = caredCount;
+  const div = document.createElement('div');
+  div.className = 'repeat-item';
+  const checks = svcOptions.map(o =>
+    `<label><input type="checkbox" name="cared_${id}_service" value="${o}"> ${o}</label>`
+  ).join('');
+  div.innerHTML = `
+    <h4>被照顧者 ${id}</h4>
+    <div class="row3">
+      <div class="field"><label>關係（照顧對象）</label><input type="text" name="cared_${id}_relation" placeholder="例：先生、母親、哥哥"></div>
+      <div class="field"><label>照顧年資</label><input type="text" name="cared_${id}_years" placeholder="例：3年"></div>
+      <div class="field"><label>被照顧者年齡</label><input type="number" name="cared_${id}_age"></div>
+    </div>
+    <div class="field"><label>失能等級</label><input type="text" name="cared_${id}_level" style="max-width:120px;"></div>
+    <div class="field">
+      <label>目前使用哪些長照服務（可複選）</label>
+      <div class="check-group">${checks}</div>
+    </div>
+    <button type="button" class="remove" onclick="this.parentElement.remove()">移除</button>`;
+  document.getElementById('caredWrap').appendChild(div);
+}
+addCared();
+
+// --- Live word counters ---
+document.querySelectorAll('textarea[data-counter]').forEach(ta => {
+  const counterEl = document.getElementById(ta.dataset.counter);
+  const update = () => {
+    const len = ta.value.length;
+    counterEl.textContent = `${len} / ${WORD_LIMIT} 字`;
+    counterEl.classList.toggle('over', len > WORD_LIMIT);
+  };
+  ta.addEventListener('input', update);
+  update();
+});
+
+// --- Photo upload (base64, no login required) ---
+const photoFiles = [];
+const drop = document.getElementById('photoDrop');
+const input = document.getElementById('photoInput');
+const thumbs = document.getElementById('thumbs');
+
+drop.addEventListener('click', () => input.click());
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('drag'));
+drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('drag'); handleFiles(e.dataTransfer.files); });
+input.addEventListener('change', () => handleFiles(input.files));
+
+function handleFiles(fileList){
+  [...fileList].slice(0, 2 - photoFiles.length).forEach(file => {
+    if (file.size > 5 * 1024 * 1024) { alert(file.name + " 超過 5MB，請壓縮後再上傳"); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      photoFiles.push({ name: file.name, mimeType: file.type, base64: reader.result.split(',')[1] });
+      const img = document.createElement('img');
+      img.src = reader.result;
+      thumbs.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// --- Submit ---
+document.getElementById('regForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const statusEl = document.getElementById('status');
+  const btn = document.getElementById('submitBtn');
+
+  // Enforce 300-character limit before submitting
+  const overLimit = [...document.querySelectorAll('textarea[data-counter]')]
+    .filter(ta => ta.value.length > WORD_LIMIT);
+  if (overLimit.length > 0) {
+    alert("以下欄位超過 300 字限制，請修改後再送出：\n" +
+      overLimit.map(ta => ta.previousElementSibling ? ta.previousElementSibling.textContent.slice(0,20)+"…" : ta.name).join("\n"));
+    return;
+  }
+
+  if (photoFiles.length === 0) {
+    statusEl.textContent = "請至少上傳 1 張照片";
+    statusEl.className = "err";
+    return;
+  }
+
+  const form = e.target;
+  const data = {};
+  new FormData(form).forEach((v,k) => {
+    if (data[k] === undefined) data[k] = v;
+    else if (Array.isArray(data[k])) data[k].push(v);
+    else data[k] = [data[k], v];
+  });
+  data.photos = photoFiles;
+  data.submitted_at = new Date().toISOString();
+  data.cared_count = caredCount;
+
+  btn.disabled = true;
+  statusEl.textContent = "送出中，請稍候…";
+  statusEl.className = "";
+
+  try {
+    const res = await fetch(ENDPOINT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(data)
+    });
+    const result = await res.json();
+    if (result.status === "ok") {
+      statusEl.textContent = "報名資料已送出，感謝填寫！件號：" + result.caseId;
+      statusEl.className = "ok";
+      form.reset();
+      thumbs.innerHTML = "";
+      photoFiles.length = 0;
+      document.querySelectorAll('.counter').forEach(c => { c.textContent = "0 / 300 字"; c.classList.remove('over'); });
+    } else {
+      throw new Error(result.message || "未知錯誤");
+    }
+  } catch (err) {
+    statusEl.textContent = "送出失敗，請稍後再試（" + err.message + "）";
+    statusEl.className = "err";
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>
