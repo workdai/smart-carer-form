@@ -193,7 +193,7 @@
     </div>
 
     <div class="field">
-      <label class="req">照片（1–2 張）</label>
+      <label>照片（1–2 張）</label>
       <div class="photo-drop" id="photoDrop">
         點擊或拖曳照片到此處上傳（每張上限 5MB）
         <input type="file" id="photoInput" accept="image/*" multiple style="display:none">
@@ -310,11 +310,6 @@ document.getElementById('regForm').addEventListener('submit', async (e) => {
     return;
   }
 
-  if (photoFiles.length === 0) {
-    statusEl.textContent = "請至少上傳 1 張照片";
-    statusEl.className = "err";
-    return;
-  }
 
   const form = e.target;
   const data = {};
